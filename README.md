@@ -1,2 +1,2 @@
 # rogue-like-python
-steered by rogueliketutorials.com
+follow the ~~Leader~~ [rogueliketutorials](https://rogueliketutorials.com)
