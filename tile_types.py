@@ -14,8 +14,8 @@ graphic_dt = np.dtype(
 # tile struct used for statically defined tile data.
 tile_dt = np.dtype(
     [
-        ("walkable", np.bool),
-        ("transparent", np.bool),
+        ("walkable", np.bool_),
+        ("transparent", np.bool_),
         ("dark", graphic_dt),
     ]
 )
