@@ -7,6 +7,7 @@ from entity import Entity
 from game_map import GameMap
 from input_handlers import EventHandler
 
+
 class Engine:
     def __init__(self, entities: Set[Entity], event_handler: EventHandler, game_map: GameMap, player: Entity):
         self.entities = entities
@@ -32,4 +33,3 @@ class Engine:
         context.present(console)
 
         console.clear()
-
