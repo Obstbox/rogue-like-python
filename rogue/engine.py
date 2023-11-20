@@ -4,9 +4,9 @@ from tcod.context import Context
 from tcod.console import Console
 from tcod.map import compute_fov
 
-from entity import Entity
-from game_map import GameMap
-from input_handlers import EventHandler
+from rogue.entity import Entity
+from rogue.game_map import GameMap
+from rogue.input_handlers import EventHandler
 
 
 class Engine:

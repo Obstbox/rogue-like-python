@@ -5,8 +5,8 @@ import random
 from typing import Iterator, Tuple, TYPE_CHECKING
 import tcod
 
-from game_map import GameMap
-import tile_types
+from rogue.game_map import GameMap
+import rogue.tile_types
 
 
 if TYPE_CHECKING:
@@ -31,7 +31,7 @@ class RectangularRoom:
     def inner(self) -> Tuple[slice, slice]:
         """Return the inner area of this room as a 2D array index."""
         return slice(self.x1 + 1, self.x2), slice(self.y1 + 1, self.y2)
-    
+
     def intersects(self, other: RectangularRoom) -> bool:
         """Return true if this room overlaps with another RectangularRoom."""
         return (
@@ -40,6 +40,7 @@ class RectangularRoom:
             and self.y1 <= other.y2
             and self.y2 >= other.y1
         )
+
 
 def tunnel_between(
         start: Tuple[int, int], end: Tuple[int, int]
@@ -59,6 +60,7 @@ def tunnel_between(
         yield x, y
     for x, y in tcod.los.bresenham((corner_x, corner_y), (x2, y2)).tolist():
         yield x, y
+
 
 def generate_dungeon(
     max_rooms: int,
@@ -86,7 +88,7 @@ def generate_dungeon(
             continue    # this room intersects, so go to the next attempt
         # if there are no intersects then the room is valid
         # dig out this rooms inner area
-        dungeon.tiles[new_room.inner] = tile_types.floor
+        dungeon.tiles[new_room.inner] = rogue.tile_types.floor
 
         if len(rooms) == 0:
             # the first room, where the player starts
@@ -95,8 +97,7 @@ def generate_dungeon(
             # rest of rooms
             # dig tunnel
             for x, y in tunnel_between(rooms[-1].center, new_room.center):
-                dungeon.tiles[x, y] = tile_types.floor
-
+                dungeon.tiles[x, y] = rogue.tile_types.floor
 
         # finally, append to the list
         rooms.append(new_room)

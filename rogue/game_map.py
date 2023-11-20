@@ -1,13 +1,14 @@
 import numpy as np
 from tcod.console import Console
 
-import tile_types
+# import rogue.tile_types
+import rogue
 
 
 class GameMap:
     def __init__(self, width: int, height: int):
         self.width, self.height = width, height
-        self.tiles = np.full((width, height), fill_value=tile_types.wall, order="F")
+        self.tiles = np.full((width, height), fill_value=rogue.tile_types.wall, order="F")
 
         # visible now
         self.visible = np.full((width, height), fill_value=False, order="F")
@@ -28,5 +29,5 @@ class GameMap:
         console.rgb[0:self.width, 0:self.height] = np.select(
             condlist=[self.visible, self.explored],
             choicelist=[self.tiles["light"], self.tiles["dark"]],
-            default=tile_types.SHROUD
+            default=rogue.tile_types.SHROUD
         )

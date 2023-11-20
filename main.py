@@ -1,10 +1,15 @@
 #!/usr/bin/env python3
 import tcod
 
-from engine import Engine
-from entity import Entity
-from input_handlers import EventHandler
-from procgen import generate_dungeon
+from rogue.engine import Engine
+from rogue.entity import Entity
+from rogue.input_handlers import EventHandler
+from rogue.procgen import generate_dungeon
+"""
+TODO
+awkward stuff about rogue.tile_types
+must be fixed some how
+"""
 
 
 def main() -> None:
