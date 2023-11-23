@@ -24,7 +24,7 @@ class EscapeAction(Action):
 
 
 class ActionWithDirection(Action):
-    def __i(self, dx: int, dy: int):
+    def __init__(self, dx: int, dy: int):
         super().__init__()
 
         self.dx = dx
