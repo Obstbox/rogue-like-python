@@ -5,6 +5,7 @@ import random
 from typing import Iterator, Tuple, TYPE_CHECKING
 import tcod
 
+import rogue.entity_factories
 from rogue.game_map import GameMap
 import rogue.tile_types
 
@@ -54,11 +55,9 @@ def place_entities(
         # ensure that no entity here already, so no stacking enemies
         if not any(entity.x == x and entity.y == y for entity in dungeon.entities):
             if random.random() < 0.8:
-                # TODO: place an Orc here
-                pass
+                rogue.entity_factories.orc.spawn(dungeon, x, y)
             else:
-                # TODO: place an Troll here
-                pass
+                rogue.entity_factories.troll.spawn(dungeon, x, y)
 
 
 def tunnel_between(

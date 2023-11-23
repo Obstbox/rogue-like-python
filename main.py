@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
+import copy
 import tcod
 
 from rogue.engine import Engine
-from rogue.entity import Entity
+import rogue.entity_factories
 from rogue.input_handlers import EventHandler
 from rogue.procgen import generate_dungeon
 """
@@ -31,7 +32,7 @@ def main() -> None:
 
     event_handler = EventHandler()
 
-    player = Entity(int(screen_width / 2), int(screen_height / 2), "@", (200, 200, 200))
+    player = copy.deepcopy(rogue.entity_factories.player)
 
     game_map = generate_dungeon(
         max_rooms=max_rooms,
