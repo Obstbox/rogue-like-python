@@ -17,25 +17,35 @@ class Action:
         """
         raise NonImplementedError()
 
+
 class EscapeAction(Action):
     def perform(self, engine: Engine, entity: Entity) -> None:
         raise SystemExit()
 
-class MovementAction(Action):
-    def __init__(self, dx: int, dy: int):
+
+class ActionWithDirection(Action):
+    def __i(self, dx: int, dy: int):
         super().__init__()
 
         self.dx = dx
         self.dy = dy
 
     def perform(self, engine: Engine, entity: Entity) -> None:
+        raise NotImplementedError()
+
+
+class MovementAction(ActionWithDirection):
+    def perform(self, engine: Engine, entity: Entity) -> None:
         dest_x = entity.x + self.dx
         dest_y = entity.y + self.dy
 
         if not engine.game_map.in_bounds(dest_x, dest_y):
-            return  # destination out of bounds
+            return    # destination out of bounds
         if not engine.game_map.tiles["walkable"][dest_x, dest_y]:
-            return  # destination blocked by tile
-        
-        entity.move(self.dx, self.dy)
+            return    # destination blocked by tile
 
+        # теоретически, сюда код не доберётся, но лучше перебдеть
+        if engine.game_map.get_blocking_entity_at_location(dest_x, dest_y):
+            return    # destination blocked by an entity
+
+        entity.move(self.dx, self.dy)
