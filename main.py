@@ -4,8 +4,8 @@ import tcod
 
 from rogue.engine import Engine
 import rogue.entity_factories
-from rogue.input_handlers import EventHandler
 from rogue.procgen import generate_dungeon
+
 """
 TODO
 awkward stuff about rogue.tile_types
@@ -33,21 +33,21 @@ def main() -> None:
         # "Terminus_curses_11x11.png", 16, 16, tcod.tileset.CHARMAP_CP437
     )
 
-    event_handler = EventHandler()
-
     player = copy.deepcopy(rogue.entity_factories.player)
 
-    game_map = generate_dungeon(
+    engine = Engine(player=player)
+
+    engine.game_map = generate_dungeon(
         max_rooms=max_rooms,
         room_min_size=room_min_size,
         room_max_size=room_max_size,
         map_width=map_width,
         map_height=map_height,
         max_monsters_per_room=max_monsters_per_room,
-        player=player
+        engine=engine,
     )
 
-    engine = Engine(event_handler=event_handler, game_map=game_map, player=player)
+    engine.update_fov()
 
     with tcod.context.new_terminal(
         screen_width,
@@ -60,9 +60,7 @@ def main() -> None:
         while True:
             engine.render(console=root_console, context=context)
 
-            events = tcod.event.wait()
-
-            engine.handle_events(events)
+            engine.event_handler.handle_events()
 
 
 # codeguard
