@@ -28,8 +28,8 @@ def main() -> None:
 
     tileset = tcod.tileset.load_tilesheet(
         # "dejavu10x10_gs_tc.png", 32, 8, tcod.tileset.CHARMAP_TCOD
-        "Cheepicus_14x14.png", 16, 16, tcod.tileset.CHARMAP_CP437
-        # "Alloy_curses_12x12.png", 16, 16, tcod.tileset.CHARMAP_CP437
+        # "Cheepicus_14x14.png", 16, 16, tcod.tileset.CHARMAP_CP437
+        "Alloy_curses_12x12.png", 16, 16, tcod.tileset.CHARMAP_CP437
         # "Terminus_curses_11x11.png", 16, 16, tcod.tileset.CHARMAP_CP437
     )
 
