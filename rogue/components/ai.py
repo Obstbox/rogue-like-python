@@ -1,17 +1,23 @@
 from __future__ import annotations
 
-from typing import List, Tuple
+from typing import List, Tuple, TYPE_CHECKING
 
 import numpy as np    # type: ignore
 import tcod
 
-from actions import Action
+from actions import Action, MeleeAction, MovementAction, WaitAction
 from rogue.components.base_component import BaseComponent
+
+if TYPE_CHECKING:
+    from rogue.entity import Actor
 
 
 class BaseAI(Action, BaseComponent):
     # BaseAI doesn’t implement a perform method, since the entities which will
     # be using AI to act will have to have an AI class that inherits from this one.
+
+    entity: Actor
+    
     def perfrom(self) -> None:
         raise NotImplementedError()
 
@@ -45,3 +51,7 @@ class BaseAI(Action, BaseComponent):
 
         # convert from List[List[int]] to List[Tuple[int, int]]
         return [(index[0], index[1]) for index in path]
+
+
+class HostileEnemy(BaseAI):
+
