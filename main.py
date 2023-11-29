@@ -63,9 +63,12 @@ def main() -> None:
     ) as context:
         root_console = tcod.console.Console(screen_width, screen_height, order="F")
         while True:
-            engine.render(console=root_console, context=context)
+            root_console.clear()
+            engine.event_handler.on_render(console=root_console)
+            context.present(root_console)
 
-            engine.event_handler.handle_events()
+            # passing context, because an extra method needed to capture the mouse
+            engine.event_handler.handle_events(context)
 
 
 # codeguard
