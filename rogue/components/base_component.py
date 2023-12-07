@@ -5,11 +5,16 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from rogue.engine import Engine
     from rogue.entity import Entity
+    from rogue.game_map import GameMap
 
 
 class BaseComponent:
-    entity: Entity    # Owning entity instace
+    parent: Entity    # Owning entity instace
+
+    @property
+    def gamemap(self) -> GameMap:
+        return self.parent.gamemap
 
     @property
     def engine(self) -> Engine:
-        return self.entity.gamemap.engine
+        return self.gamemap.engine

@@ -6,13 +6,12 @@ import numpy as np    # type: ignore
 import tcod
 
 from rogue.actions import Action, MeleeAction, MovementAction, WaitAction
-from rogue.components.base_component import BaseComponent
 
 if TYPE_CHECKING:
     from rogue.entity import Actor
 
 
-class BaseAI(Action, BaseComponent):
+class BaseAI(Action):
     # BaseAI doesn’t implement a perform method, since the entities which will
     # be using AI to act will have to have an AI class that inherits from this one.
 
