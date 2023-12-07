@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import copy
+import traceback
 import tcod
 import rogue.color
 
@@ -67,8 +68,12 @@ def main() -> None:
             engine.event_handler.on_render(console=root_console)
             context.present(root_console)
 
-            # passing context, because an extra method needed to capture the mouse
-            engine.event_handler.handle_events(context)
+            try:
+                for event in tcod.event.wain():
+                    context.convert_event(event)
+                    engine.event_handler(event)
+            except Exception:
+                traceback.print_exc(traceback.format_exc(), rogue.color.error)
 
 
 # codeguard
